@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Collection</title>
+    <script src="recipe_api.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat Alternates", sans-serif;
+        }
+        .montserrat-alternates-thin {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.montserrat-alternates-extralight {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.montserrat-alternates-light {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.montserrat-alternates-regular {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-alternates-medium {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.montserrat-alternates-semibold {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.montserrat-alternates-bold {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.montserrat-alternates-extrabold {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.montserrat-alternates-black {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.montserrat-alternates-thin-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.montserrat-alternates-extralight-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.montserrat-alternates-light-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.montserrat-alternates-regular-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.montserrat-alternates-medium-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.montserrat-alternates-semibold-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.montserrat-alternates-bold-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.montserrat-alternates-extrabold-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.montserrat-alternates-black-italic {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+			
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            font-size: 42px;
+            margin-bottom: 0px;
+            text-align: center;
+			color:#b46941;
+			 font-family: "Montserrat Alternates", sans-serif;
+
+        }
+        
+        p.section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 24px;
+			font-weight:600;
+			font-family: "Montserrat Alternates", sans-serif;
+            color: #4d3a33;
+        }
+        
+        /* Top bar with 3 colors */
+        .top-bar {
+            display: flex;
+            height: 18px;
+        }
+        
+        .top-bar-section {
+            flex: 1;
+        }
+        
+        .top-bar-section:nth-child(1) {
+            background-color: #b46941;
+        }
+        
+        .top-bar-section:nth-child(2) {
+            background-color: #cfc28d;
+        }
+        
+        .top-bar-section:nth-child(3) {
+            background-color: #b46941;
+        }
+        
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        
+        .logo img {
+            height: 75px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #d47a45;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #4d3a33;
+        }
+        nav ul li a:active {
+            color: #4d3a33;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-left: 30px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #f1f1f1;
+            border-radius: 50%;
+            margin-left: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #45B7D1;
+            color: white;
+        }
+        
+        /* Banner styles */
+        .banner {
+            width: 100%;
+            height: 460px;
+            background-color: #f5f5f5;
+             background-image: url("images/top-banner.jpg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+            text-align: left;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+			padding-left: 100px;
+        }
+        
+        .banner h1 {
+            font-size: 48px;
+			text-align: left;
+            margin-bottom: 10px;
+			 line-height: normal;
+        }
+        
+        .banner p {
+            font-size: 22px;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+        
+        /* Countdown section */
+        .countdown-section {
+		 width: 100%;
+            height: 510px;
+		 background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            background-color: #f9f9f9;
+			background-image: url("images/section1-bg.jpg");
+            text-align: center;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .countdown-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 100px;
+        }
+        
+        .countdown-value {
+            font-size: 42px;
+            font-weight: bold;
+            color: #b46941;
+        }
+        
+        .countdown-label {
+            font-size: 16px;
+            color: #4d3a33;
+            text-transform: uppercase;
+            margin-top: 5px;
+			font-weight:600;
+        }
+        
+        /* Recipe form section */
+        .recipe-form {
+            background-color: #fff;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #cfc28d;
+            color: #4d3a33;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+			font-weight:700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #4d3a33;
+			color: #ffffff;
+        }
+        
+        /* Recipe table section */
+        .recipe-table {
+            background-color: #f8f5f4;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        th, td {
+            padding: 16px;
+			font-weight:600;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #4d3a33;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+        
+        /* Choices section */
+        .choices-section {
+            text-align: center;
+        }
+        
+        .choices-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .choice-card {
+            flex: 1;
+            min-width: 337px;
+            max-width: 337px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .choice-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .choice-img {
+            width: 100%;
+            height: 388px;
+
+        }
+        
+        .choice-title {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #fff;
+            color: #fff;
+        }
+        
+        .footer-bars {
+            display: flex;
+            height: 46px;
+        }
+        
+        .footer-bar {
+            flex: 1;
+        }
+        
+        .footer-bar:nth-child(1) {
+            background-color: #b46941;
+        }
+        
+        .footer-bar:nth-child(2) {
+            background-color: #cfc28d;
+			flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+			font-family: "Montserrat Alternates", sans-serif;
+			font-weight:600;
+			color:#4d3a33;
+			padding-top: 10px;
+        }
+        
+        .footer-bar:nth-child(3) {
+            background-color: #b46941;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #222;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .social-icons {
+                margin: 20px 0 0 0;
+            }
+            
+            .countdown-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .countdown-box {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top bar with 3 colors -->
+    <div class="top-bar">
+        <div class="top-bar-section"></div>
+        <div class="top-bar-section"></div>
+        <div class="top-bar-section"></div>
+    </div>
+    
+    <!-- Header with logo, menu, and social icons -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Ritual Roast">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="social-icons">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </header>
+    
+    <!-- Banner section -->
+    <section class="banner">
+        <h1>Cook Up a Storm: </br>Share Your Signature Dish!</h1>
+        <p>Calling all food lovers and home chefs! Whip up your best recipe—whether it’s a family heirloom, a creative twist on a classic, or your go-to comfort food. The most delicious, original, or beautifully presented dish wins! Submit your recipe now and let’s celebrate great flavors together.</p>
+    </section>
+    
+    <!-- Countdown section -->
+    <section class="countdown-section">
+        <div class="container">
+            <h2>Enter the Contest </h2>
+            <p class="section-description">Submit your favorite recipe, and it might be listed on our website! Winner gets featured on our blog!</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recipe form section -->
+    <section class="recipe-form">
+        <div class="container">
+            <h2>Add your Recipe</h2>
+            <p class="section-description">Submit your favorite recipe, and it might be listed on our website! Winner gets featured on our blog!</p>
+            
+            <div class="form-container">
+                <form id="recipeSubmissionForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recipeName">Recipe Name</label>
+                        <input type="text" id="recipeName" name="recipeName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ingredients">Recipe Ingredients (one per line)</label>
+                        <textarea id="ingredients" name="ingredients" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Recipe Description</label>
+                        <textarea id="description" name="description" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Recipe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recipe table section -->
+    <section class="recipe-table">
+        <div class="container">
+            <h2>Recent Recipe Submissions</h2>
+            <p class="section-description">Check out what our community has been cooking lately</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Recipe</th>
+                        <th>Ingredients</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                      <tbody id="recipeTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Choices section -->
+    <section class="choices-section">
+        <div class="container">
+            <h2>Our Choices</h2>
+            <p class="section-description">Elevate your cooking like a pro! </br>Impressive dishes for 
+dates, holidays and beyond.</p>
+            
+            <div class="choices-container">
+                <div class="choice-card">
+                    <img src="images/oc01.png" alt="Summer Salads" class="choice-img">
+                    <div class="choice-title">Snacks</div>
+                </div>
+                <div class="choice-card">
+                    <img src="images/oc02.png" alt="Summer Salads" class="choice-img">
+                    <div class="choice-title">Sweets</div>
+                </div>
+                <div class="choice-card">
+                  <img src="images/oc03.png" alt="Summer Salads" class="choice-img">
+                    <div class="choice-title">Pastries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bars">
+            <div class="footer-bar"></div>
+            <div class="footer-bar">Copyrights &copy; Ritual Roast Limited</div>
+            <div class="footer-bar"></div>
+        </div>
+        
+    </footer>
+    
+ <script>
+    // Countdown timer
+    function updateCountdown() {
+        // Set a fixed end date (e.g., August 31, 2027 at 23:59:59)
+        const endDate = new Date('August 31, 2027 23:59:59').getTime();
+        const now = new Date().getTime();
+        
+        const diff = endDate - now;
+        
+        // Calculate days, hours, minutes, seconds
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        // Update the display
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        
+        // If the countdown is finished
+        if (diff < 0) {
+            clearInterval(countdownTimer);
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+        }
+    }
+    
+    // Update countdown every second
+    const countdownTimer = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call
+    
+    // Form submission
+    document.getElementById('recipeSubmissionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const recipe = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        recipe_name: document.getElementById("recipeName").value,
+        ingredients: document.getElementById("ingredients").value,
+        description_main: document.getElementById("description").value,
+        };
+
+        try {
+            addRecipe(recipe);
+            alert("Recipe submitted successfully!");
+            document.getElementById('recipeSubmissionForm').reset();
+            window.location.reload();
+            
+        } catch (err) {
+            alert('Thank you for submitting your recipe! We will review it soon.');
+        }
+    });
+
+</script>
+</body>
+</html>
